@@ -4,16 +4,17 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => {
     try{
-        const data = await Resources.get();
-        res.status(200).json(data);
+        const resources = await Resources.get();
+        res.status(200).json(resources);
     } catch (err) {
         next(err)
     }
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', async (req, res, next) => {
     try {
-        res.status(201).json("post resource")
+        const data = await Resources.create(req.body)
+        res.status(201).json(data)
     } catch (err) {
         next(err)
     }
