@@ -1,14 +1,14 @@
 const express = require('express');
-const { convertToBoolean } = require('./middleware');
+const { convertNewToBoolean, convertAllToBoolean } = require('./middleware');
 
 const router = express.Router();
 
-router.get('/', convertToBoolean, (req, res) => {
-        res.status(200).json(req.projects)
+router.get('/', convertAllToBoolean, (req, res) => {
+        res.status(200).json(req.body)
 });
 
-router.post('/', convertToBoolean, (req, res) => {
-        res.status(201).json(req.project)
-})
+router.post('/', convertNewToBoolean, (req, res) => {
+        res.status(201).json(req.body)
+});
 
 module.exports = router;
