@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => {
     try{
-        const resources = await Resources.get();
+        const resources = await Resources.getResource();
         res.status(200).json(resources);
     } catch (err) {
         next(err)
@@ -13,8 +13,8 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     try {
-        const data = await Resources.create(req.body)
-        res.status(201).json(data)
+        const newResource = await Resources.createResource(req.body)
+        res.status(201).json(newResource)
     } catch (err) {
         next(err)
     }

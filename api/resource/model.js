@@ -1,11 +1,11 @@
 const db = require('../../data/dbConfig');
 
-function get() {
+function getResource() {
     return db("resources")
     .select("resource_id", "resource_name", "resource_description")
 }
 
-async function create(resource) {
+async function createResource(resource) {
     const id = await db("resources").insert(resource);
     return db("resources")
     .where("resource_id", id)
@@ -14,6 +14,6 @@ async function create(resource) {
 }
 
 module.exports = {
-    get,
-    create,
+    getResource,
+    createResource,
 }
