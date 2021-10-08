@@ -17,6 +17,23 @@ const convertAllToBoolean = async (req, res, next) => {
     }
 }
 
+const convertNewToBoolean = async (req, res, next) => {
+    try {
+        const task = await Tasks.createTask(req.body);
+        req.body = task;
+        if(task.task_completed === 0) {
+            req.body.task_completed = false;
+            next()
+        } else {
+            req.body.task_completed = true;
+            next()
+        }
+    } catch (err) {
+        next(err)
+    }
+}
+
 module.exports = {
-    convertAllToBoolean
+    convertAllToBoolean,
+    convertNewToBoolean
 }
