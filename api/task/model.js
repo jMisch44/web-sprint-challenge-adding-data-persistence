@@ -10,15 +10,22 @@ function getTasks() {
         "task_completed",
         "p.project_name",
         "p.project_description"
-        )
+    )
 }
 
-function createTask(task) {
-    // const id = db("tasks")
-    // .leftJoin("project as p")
-    // .insert(task);
-    // return db("tasks")
-    // .where("task_id", id)
+async function createTask(task) {
+    const id = await db("tasks")
+    .insert(task)
+    return db("tasks")
+    .where("task_id", id)
+    .select(        
+        "task_id",
+        "task_description",
+        "task_notes",
+        "task_completed",
+        "project_id"
+    )
+    .first()
 
 }
 
